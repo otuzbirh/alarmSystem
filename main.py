@@ -1,10 +1,24 @@
 import threading
-# from playsound import playsound
 import cv2
 import imutils
-import wave
-import pyglet
 import os
+import smtplib
+
+#informacije o serveru
+smtp_server = 'smtp.example.com'
+port = 587
+
+# korisnik i lozinka
+username = 'example@example.com'
+password = 'examplepassword'
+
+# poruka
+message = 'Upozorenje'
+
+
+
+
+
 
 cap = cv2.VideoCapture(0)
 
@@ -32,6 +46,11 @@ def beep_alarm():
 
         os.system('afplay ' + file_path)
 
+        # slanje maila
+        server = smtplib.SMTP(smtp_server, port)
+        server.starttls()
+        server.login(username, password)
+        server.sendmail(username, username,
 
 
     alarm = False
